@@ -21,9 +21,12 @@
     }
   },
   "dependencies": {
+    "@nextui-org/react": "^2.2.9",
     "@remotion/bundler": "4.0.76",
     "@remotion/cli": "4.0.76",
+    "@remotion/google-fonts": "^4.0.76",
     "@remotion/zod-types": "4.0.76",
+    "framer-motion": "^10.16.15",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "remotion": "4.0.76",
@@ -31,11 +34,11 @@
   },
   "devDependencies": {
     "@remotion/eslint-config": "4.0.76",
+    "@remotion/tailwind": "4.0.76",
     "@types/react": "^18.0.26",
     "@types/web": "^0.0.86",
     "eslint": "^8.43.0",
     "prettier": "^2.8.8",
-    "@remotion/tailwind": "4.0.76",
     "typescript": "^4.9.4"
   },
   "packageManager": "yarn@1.22.19"
