@@ -1,7 +1,11 @@
+import { motion } from "framer-motion"
+import { IntroScene } from "./scene/intro.scene"
+
 export function App() {
-  
   return (
-    <div className="bg-white text-3xl">asdas {window.innerWidth} {window.innerHeight}</div>
+    <motion.div className="bg-transparent h-full w-full relative">
+      <IntroScene />
+    </motion.div>
   )
 }
 

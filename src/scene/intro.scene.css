@@ -1,0 +1,30 @@
+.box {
+  --backgroundColor: #0e0e0e;
+  background-color: var(--backgroundColor);
+}
+
+.border-intro {
+  --border-width: 10px;
+  --border-radius: 5rem;
+  height: 100%;
+  position: relative;
+  border-radius: var(--border-radius);
+  padding: var(--border-width);
+}
+
+.border-intro > div {
+  border-radius: var(--border-radius);
+  background-color: var(--backgroundColor);
+}
+
+/*
+.border-intro::before {
+  position: absolute;
+  top: calc(var(--border-width) * -1);
+  bottom: calc(var(--border-width) * -1);
+  left: calc(var(--border-width) * -1);
+  right: calc(var(--border-width) * -1);
+  content: '';
+  border-radius: var(--border-radius);
+}
+*/
