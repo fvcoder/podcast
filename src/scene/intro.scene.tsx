@@ -2,6 +2,7 @@ import { motion, Variants } from "framer-motion"
 import "./intro.scene.css"
 import { useEffect, useState } from "react"
 import { useAppSelector } from "../store"
+import { ContainerFill } from "../components/container.scene"
 
 const boxAnimations: Variants = {
   initial: {
@@ -45,43 +46,45 @@ export function IntroScene() {
   }, [scene])
 
   return (
-    <motion.div
-      layout
-      className="box py-16 px-28 h-full"
-      initial={{ opacity: 0 }}
-      variants={boxAnimations}
-      animate={state}
-      transition={{ delayChildren: 1 }}
-    >
+    <ContainerFill>
       <motion.div
         layout
-        className="border-intro"
-        variants={borderAnimations}
+        className="box py-16 px-28 h-full"
+        initial={{ opacity: 0 }}
+        variants={boxAnimations}
         animate={state}
-        transition={{ duration: 2, times: [0, .15, .5, .65, 1], delayChildren: 1 }}
+        transition={{ delayChildren: 1 }}
       >
-        <div className="h-full bg-black px-10 py-6">
-          <motion.h1
-            className="text-[#ded9cd] text-[5rem]"
-            initial={{ opacity: 0 }}
-            variants={textAnimations}
-            animate={state}
-            transition={{ duration: 1.5 }}
-          >
-            Un texto muy bonito Un texto muy bonito Un texto muy bonito Un texto muy bonito
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            variants={textAnimations}
-            animate={state}
-            transition={{ duration: 1.5 }}
-            className="text-gray-500 text-[3.5rem]"
-          >
-            Lldasd - P01O01
-          </motion.p>
-        </div>
+        <motion.div
+          layout
+          className="border-intro"
+          variants={borderAnimations}
+          animate={state}
+          transition={{ duration: 2, times: [0, .15, .5, .65, 1], delayChildren: 1 }}
+        >
+          <div className="h-full bg-black px-10 py-6">
+            <motion.h1
+              className="text-[#ded9cd] text-[5rem]"
+              initial={{ opacity: 0 }}
+              variants={textAnimations}
+              animate={state}
+              transition={{ duration: 1.5 }}
+              >
+              Un texto muy bonito Un texto muy bonito Un texto muy bonito Un texto muy bonito
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0 }}
+              variants={textAnimations}
+              animate={state}
+              transition={{ duration: 1.5 }}
+              className="text-gray-500 text-[3.5rem]"
+              >
+              Lldasd - P01O01
+            </motion.p>
+          </div>
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </ContainerFill>
   )
 }
 

@@ -4,10 +4,14 @@ interface IntroState {
   name: 'intro'
 }
 
-export type SceneState = IntroState
+interface CameraState {
+  name: 'camera'
+}
 
-const initialState = {
-  name: 'intro'
+export type SceneState = IntroState | CameraState
+
+const initialState: SceneState = {
+  name: 'camera'
 }
 
 export const sceneSlice = createSlice({
@@ -15,7 +19,8 @@ export const sceneSlice = createSlice({
   initialState,
   reducers: {
     setScene: (state, action: PayloadAction<SceneState>) => {
-      state = action.payload
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      state = action.payload as any
     }
   }
 })
