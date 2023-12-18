@@ -5,13 +5,17 @@ interface IntroState {
 }
 
 interface CameraState {
-  name: 'camera'
+  name: 'camera',
 }
 
-export type SceneState = IntroState | CameraState
+interface DemoState {
+  name: 'demo',
+}
+
+export type SceneState = IntroState | CameraState | DemoState | { name: string }
 
 const initialState: SceneState = {
-  name: 'camera'
+  name: 'demo',
 }
 
 export const sceneSlice = createSlice({

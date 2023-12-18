@@ -1,40 +1,56 @@
-import { useEffect } from "react"
-import { useCameraAi } from "../hook/camera.hook"
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useRef } from "react"
+import { ContainerFill } from "../components/container.scene"
+import { useDispatch } from "react-redux"
+import { setCameraPosition } from "../store/camera.slice"
+import { useAppSelector } from "../store"
 
 export function CameraScene() {
-  const { stream, video, predict, result } = useCameraAi()
+  const dispath = useDispatch()
+  const scene = useAppSelector(x => x.scene)
+  const container = useRef<HTMLDivElement | null>(null)
 
-  useEffect(() => {
-    if (stream && video.current) {
-      video.current.srcObject = stream
-      video.current.addEventListener('loadeddata', predict)
+  if (scene.name !== "camera") {
+    return null;
+  }
+
+  function onResize() {
+    if (container.current) {
+      dispath(setCameraPosition({
+        x: 0,
+        y: 0,
+        width: container.current.offsetWidth,
+        height: container.current.offsetHeight,
+      }))
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stream, video])
+  }
+  
+  useEffect(() => {
+    if (scene.name === "camera") {
+      window.addEventListener('resize', onResize)
+    } else {
+      window.removeEventListener('resize', onResize)
+    }
+    return () => {
+      window.removeEventListener('resize', onResize)
+    }
+  }, [scene])
+  
+  useEffect(() => {
+    if (container.current)   {
+      onResize()
+      container.current.addEventListener('resize', onResize)
+    }
+
+    return () => {
+      if (container.current) {
+        container.current.removeEventListener('resize', onResize)
+      }
+    }
+  }, [container, dispath])
   
   return (
-    <div className="bg-black h-full w-full">
-      <div className="bg-red-500 w-fit h-fit relative">
-        <video
-          ref={video}
-          autoPlay
-          playsInline
-          />
-        {result.map(x => {
-          return (
-            <div
-              className="border-2 absolute"
-              key={`person-${x}`}
-              style={{
-                top: x.boundingBox?.originY,
-                left: x.boundingBox?.originX,
-                width: x.boundingBox?.width,
-                height: x.boundingBox?.height
-              }}
-            />
-          )
-        })}
-      </div>
-    </div>
+    <ContainerFill ref={container} />
   )
 }
